@@ -8,9 +8,10 @@ import java.sql.SQLException;
 public class JDBCExemplo {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        //Class.forName("com.mysql.jdbc.Driver"); <- Pode ser utilizado para achar o Driver do MySQL
-        //DriverManager.registerDriver(new com.mysql.jdbc.Driver()); <- Pode ser utilizado para achar o Driver do MySQL
-        Connection conexao = DriverManager.getConnection("jdbc:mysql://localhost/fj21", "root", "7139");
+        //Class.forName("com.mysql.jdbc.Driver"); //Pode ser utilizado para achar o Driver do MySQL
+        //DriverManager.registerDriver(new com.mysql.jdbc.Driver()); //Pode ser utilizado para achar o Driver do MySQL
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        Connection conexao = connectionFactory.getConnection();
         System.out.println("Conectado!");
         conexao.close();
     }

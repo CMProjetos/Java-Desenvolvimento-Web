@@ -1,3 +1,5 @@
+package jdbc;
+
 import java.sql.Connection;
 import java.sql.DriverAction;
 import java.sql.DriverManager;

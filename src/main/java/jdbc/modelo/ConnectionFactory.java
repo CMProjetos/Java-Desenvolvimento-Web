@@ -1,4 +1,4 @@
-package jdbc;
+package jdbc.modelo;
 
 import java.sql.Connection;
 import java.sql.DriverAction;

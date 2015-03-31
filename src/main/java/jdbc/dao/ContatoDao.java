@@ -3,10 +3,10 @@ package jdbc.dao;
 import jdbc.modelo.ConnectionFactory;
 import jdbc.modelo.Contato;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by Carlos Eduardo on 29/03/2015.
@@ -36,10 +36,44 @@ public class ContatoDao {
             //Executa
             stmt.execute();
 
-            //Fecha a conexão
+            //Fecha a conexï¿½o
             stmt.close();
         } catch (SQLException e) {
             System.out.println(e);
+        }
+    }
+
+    public List<Contato> getLista() {
+        try {
+
+            List<Contato> contatos = new ArrayList<Contato>();
+            PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM contatos");
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()) {
+                //Criando objeto contato
+                Contato contato = new Contato();
+
+                //Pegando dados da tabela contato no banco
+                contato.setNome(rs.getString("nome"));
+                contato.setEmail(rs.getString("email"));
+                contato.setEndereco(rs.getString("endereco"));
+
+                //Montando a data atravÃ©s do Calendar
+                Calendar data = Calendar.getInstance();
+                data.setTime(rs.getDate("dataNascimento"));
+                contato.setDataNascimento(data);
+
+                //Adicionando o objeto a lista
+                contatos.add(contato);
+            }
+
+            rs.close();
+            stmt.close();
+            return contatos;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

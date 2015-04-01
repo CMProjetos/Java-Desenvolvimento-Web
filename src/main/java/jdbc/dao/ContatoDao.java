@@ -1,6 +1,7 @@
 package jdbc.dao;
 
-import jdbc.modelo.ConnectionFactory;
+import jdbc.dao.conexao.ConnectionFactory;
+import jdbc.exceptions.DAOException;
 import jdbc.modelo.Contato;
 
 import java.sql.*;
@@ -14,10 +15,6 @@ import java.util.List;
 public class ContatoDao {
 
     private Connection connection;
-    //Cria um preapredStatement
-    String sql = "insert into contatos" +
-            " (nome,email,endereco,dataNascimento)" +
-            " values (?,?,?,?)";
 
     public ContatoDao() {
         this.connection = new ConnectionFactory().getConnection();
@@ -25,6 +22,10 @@ public class ContatoDao {
 
     public void adiciona(Contato contato) {
         try {
+            //Cria um preapredStatement
+            String sql = "insert into contatos" +
+                    " (nome,email,endereco,dataNascimento)" +
+                    " values (?,?,?,?)";
             PreparedStatement stmt = connection.prepareStatement(sql);
 
             //Preenche os valores
@@ -39,15 +40,14 @@ public class ContatoDao {
             //Fecha a conex�o
             stmt.close();
         } catch (SQLException e) {
-            System.out.println(e);
+            throw new DAOException();
         }
     }
 
     public List<Contato> getLista() {
         try {
-
             List<Contato> contatos = new ArrayList<Contato>();
-            PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM contatos");
+            PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM contatos WHERE nome LIKE 'C%'");
             ResultSet rs = stmt.executeQuery();
 
             while(rs.next()) {
@@ -73,7 +73,7 @@ public class ContatoDao {
             return contatos;
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DAOException();
         }
     }
 }

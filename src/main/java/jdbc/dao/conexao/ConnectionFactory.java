@@ -1,4 +1,4 @@
-package jdbc.modelo;
+package jdbc.dao.conexao;
 
 import java.sql.Connection;
 import java.sql.DriverAction;

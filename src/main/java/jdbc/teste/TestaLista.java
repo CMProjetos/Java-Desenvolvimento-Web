@@ -1,13 +1,8 @@
 package jdbc.teste;
 
 import jdbc.dao.ContatoDao;
-import jdbc.modelo.ConnectionFactory;
 import jdbc.modelo.Contato;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 

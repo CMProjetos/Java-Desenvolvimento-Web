@@ -1,6 +1,6 @@
 package jdbc.teste;
 
-import jdbc.modelo.ConnectionFactory;
+import jdbc.dao.conexao.ConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.Date;

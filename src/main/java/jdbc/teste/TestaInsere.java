@@ -12,12 +12,12 @@ public class TestaInsere {
 
     public static void main(String[] args) {
         Contato contato = new Contato();
-        contato.setNome("Carlos");
-        contato.setEmail("carloseduardo@sagaranatech.com");
-        contato.setEndereco("Rua IV, Casa 279");
+        contato.setNome("Antonio Filho");
+        contato.setEmail("antoniofilho@sagaranatech.com");
+        contato.setEndereco("Ruan General Sampaio, Marina Park Hotel, Quarto 502");
         contato.setDataNascimento(Calendar.getInstance());
 
-        //Iniciando conexão pelo construtor
+        //Iniciando conexï¿½o pelo construtor
         ContatoDao dao = new ContatoDao();
 
         //Adicionando dados no banco

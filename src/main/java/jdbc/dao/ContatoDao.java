@@ -37,8 +37,9 @@ public class ContatoDao {
             //Executa
             stmt.execute();
 
-            //Fecha a conex�o
+            //Fechando todas as conexões para liberar portas utilizadas
             stmt.close();
+            connection.close();
         } catch (SQLException e) {
             throw new DAOException();
         }
@@ -68,12 +69,64 @@ public class ContatoDao {
                 contatos.add(contato);
             }
 
+            //Fechando todas as conexões para liberar portas utilizadas
             rs.close();
             stmt.close();
+            connection.close();
+
             return contatos;
 
         } catch (SQLException e) {
             throw new DAOException();
         }
     }
+
+    public Contato pesquisar(Integer id) {
+        try {
+            Contato contato = new Contato();
+            PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM contatos WHERE id LIKE 'posicao'".replace("posicao", id.toString()));
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()) {
+                //Pegando dados da tabela contato no banco
+                contato.setNome(rs.getString("nome"));
+                contato.setEmail(rs.getString("email"));
+                contato.setEndereco(rs.getString("endereco"));
+
+                //Montando a data através do Calendar
+                Calendar data = Calendar.getInstance();
+                data.setTime(rs.getDate("dataNascimento"));
+                contato.setDataNascimento(data);
+            }
+
+            //Fechando todas as conexões para liberar portas utilizadas
+            rs.close();
+            stmt.close();
+            connection.close();
+
+            return contato;
+        } catch (SQLException e) {
+            throw new DAOException();
+        }
+    }
+
+    public void altera (Contato contato) {
+        String sql = "update contatos set nome=?, email=?, endereco=?, dataNascimento=? where id=?";
+
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, contato.getNome());
+            stmt.setString(2, contato.getEmail());
+            stmt.setString(3, contato.getEndereco());
+            stmt.setDate(4, new Date(contato.getDataNascimento().getTimeInMillis()));
+            stmt.setLong(5, contato.getId());
+
+            stmt.execute();
+            stmt.close();
+
+        } catch (SQLException e) {
+            throw new DAOException();
+        }
+    }
+
 }

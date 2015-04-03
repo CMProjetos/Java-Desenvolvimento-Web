@@ -111,9 +111,9 @@ public class ContatoDao {
     }
 
     public void altera (Contato contato) {
-        String sql = "update contatos set nome=?, email=?, endereco=?, dataNascimento=? where id=?";
-
         try {
+            String sql = "update contatos set nome=?, email=?, endereco=?, dataNascimento=? where id=?";
+
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, contato.getNome());
             stmt.setString(2, contato.getEmail());

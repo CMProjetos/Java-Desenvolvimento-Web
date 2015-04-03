@@ -1,4 +1,4 @@
-package jdbc.teste;
+package jdbc.teste.contato;
 
 import jdbc.dao.ContatoDao;
 import jdbc.modelo.Contato;
@@ -11,8 +11,6 @@ import java.text.SimpleDateFormat;
 public class TestaPesquisa {
 
     public static void main(String args[]) {
-        //int x = 2;
-        //String y = "teste %f",(x);
         ContatoDao dao = new ContatoDao();
         Contato contato = dao.pesquisar(1);
 

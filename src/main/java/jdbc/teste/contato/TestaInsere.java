@@ -1,4 +1,4 @@
-package jdbc.teste;
+package jdbc.teste.contato;
 
 import jdbc.dao.ContatoDao;
 import jdbc.modelo.Contato;

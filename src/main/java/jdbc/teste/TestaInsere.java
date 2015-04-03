@@ -12,9 +12,9 @@ public class TestaInsere {
 
     public static void main(String[] args) {
         Contato contato = new Contato();
-        contato.setNome("Antonio Filho");
-        contato.setEmail("antoniofilho@sagaranatech.com");
-        contato.setEndereco("Ruan General Sampaio, Marina Park Hotel, Quarto 502");
+        contato.setNome("Isaac");
+        contato.setEmail("isaac@sagaranatech.com");
+        contato.setEndereco("Av. Engenheiro Luiz Vieira, 920, Sala 111");
         contato.setDataNascimento(Calendar.getInstance());
 
         //Iniciando conex�o pelo construtor
